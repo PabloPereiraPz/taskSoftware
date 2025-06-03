@@ -1,3 +1,15 @@
 <app-header></app-header>
-<app-user></app-user>
+
+<main>
+  <ul id="users">
+    @for (theUser of user; track theUser.id) {
+    <li>
+      <app-user [user]="theUser" (select)="onSelectUser($event)"></app-user>
+      <!-- o $event capitura o ID, ao 'ouvir' o click. é tipo um capturador do acionamento do click. -->
+    </li>
+    }
+    <!-- estamos organizando os elementos na tela através do appcomponent-->
+  </ul>
+  <app-tasks [name]="selectedUser.name"></app-tasks>
+</main>
 <router-outlet></router-outlet>

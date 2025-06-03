@@ -1,0 +1,9 @@
+<div>
+  <button (click)="onSelectUser()">
+    <img [src]="ImagePath" [alt]="user.name" />
+    <!-- aqui selecionamos a imagem e atrelamos o nome a ela, uma vez que o selectedUser.name já faz o trabalho de sincronizar o user. -->
+    <!-- aqui estamos selecionando a imagem utilizando [src]="selectedUser.avatar"-->
+    <span> {{ user.name }} </span>
+    <!-- estamos chamando ele como função pelo fato de termos adicionado os signals. -->
+  </button>
+</div>
