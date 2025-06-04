@@ -1,29 +1,37 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Add } from './new-tasks.model';
-
+import { TasksService } from '../tasks.service';
 @Component({
   selector: 'app-new-tasks',
   templateUrl: './new-tasks.component.html',
   styleUrls: ['./new-tasks.component.css'],
   imports: [FormsModule],
+  standalone: true,
 })
 export class NewTasksComponent {
-  @Output() cancelando = new EventEmitter<void>();
-  @Output() adicionando = new EventEmitter<Add>();
+  @Input({required: true}) userId!: string
+  @Output() close = new EventEmitter<void>();
   tituloAdicionado = '';
   summaryAdicionado = '';
   dataAdicionada = '';
+  private tasksSerivce = inject(TasksService);
 
   cancelandoTask() {
-    this.cancelando.emit();
+    this.close.emit();
   }
 
   onSubmit() {
-    this.adicionando.emit({
-      title: this.tituloAdicionado,
-      summary: this.summaryAdicionado,
-      date: this.dataAdicionada,
-    });
+    this.tasksSerivce.addTask(
+      {
+        title: this.tituloAdicionado,
+        summary: this.summaryAdicionado,
+        dueDate: this.dataAdicionada,
+      },
+      this.userId
+    );
+    this.close.emit();
   }
+
+
 }

@@ -8,24 +8,14 @@ import {
   output,
 } from '@angular/core';
 
-import { User } from './user.model' // importado mas não utilizado aqui.
-/*
-type UserType = { // isso é um TYPE.
-  id: string;
-  avatar: string;
-  name: string;
-};
-
-interface UserInterface{ // Isso é um interface
-    id: string;
-  avatar: string;
-  name: string;
-} */
+// User component - Gerencia a exibição e interação dos usuários
+import { User } from './user.model';
+import { Card } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [Card],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
@@ -38,7 +28,7 @@ export class UserComponent {
     avatar: string;
     name: string;
   };
-  @Input({required: true}) selected!: boolean;
+  @Input({ required: true }) selected!: boolean;
 
   @Output() select = new EventEmitter<string>();
 

@@ -1,7 +1,7 @@
 @if (addingTask) {
 <app-new-tasks
-  (cancelando)="cancelTask()"
-  (adicionando)="adicionandoTask($event)"
+  [userId]="userId"
+  (close)="cancelandoTask()"
 ></app-new-tasks>
 }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component'; // importando o componente para aparecer na tela.
+import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { dataUsers } from './dataUsers';
