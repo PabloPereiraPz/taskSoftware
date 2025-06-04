@@ -7,6 +7,8 @@ import {
   computed,
   output,
 } from '@angular/core';
+
+import { User } from './user.model' // importado mas não utilizado aqui.
 /*
 type UserType = { // isso é um TYPE.
   id: string;
@@ -36,6 +38,7 @@ export class UserComponent {
     avatar: string;
     name: string;
   };
+  @Input({required: true}) selected!: boolean;
 
   @Output() select = new EventEmitter<string>();
 

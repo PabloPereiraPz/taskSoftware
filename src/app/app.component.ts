@@ -4,7 +4,6 @@ import { HeaderComponent } from './header/header.component'; // importando o com
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { dataUsers } from './dataUsers';
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, UserComponent, TasksComponent],
@@ -14,7 +13,7 @@ import { dataUsers } from './dataUsers';
 })
 export class AppComponent {
   title = 'angular-complete-2025';
-  selectedUserId = 'u1';
+  selectedUserId?: string;
 
   user = dataUsers; // aqui estamos importando o dataUser para dentro do appComponent pra conseguir utilizar eles.
 
@@ -22,7 +21,7 @@ export class AppComponent {
     return this.user.find((user) => user.id === this.selectedUserId)!;
   }
 
-  onSelectUser (id: string) {
+  onSelectUser(id: string) {
     this.selectedUserId = id;
   }
 }

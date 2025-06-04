@@ -2,14 +2,24 @@
 
 <main>
   <ul id="users">
-    @for (theUser of user; track theUser.id) {
+    @for (nomeColocado of user; track nomeColocado.id) {
     <li>
-      <app-user [user]="theUser" (select)="onSelectUser($event)"></app-user>
+      <app-user
+        [user]="nomeColocado"
+        (select)="onSelectUser($event)"
+        [selected]="nomeColocado.id === selectedUserId"
+      ></app-user>
+      <!-- ali no [selected]="user.id === selectedUserId" o user.id === selectedUserId é a condição. -->
       <!-- o $event capitura o ID, ao 'ouvir' o click. é tipo um capturador do acionamento do click. -->
     </li>
     }
     <!-- estamos organizando os elementos na tela através do appcomponent-->
   </ul>
-  <app-tasks [name]="selectedUser.name"></app-tasks>
+
+  @if (selectedUser) {
+  <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name"></app-tasks>
+  } @else {
+  <p id="retorno">Selecione um usuário para ver sua task!</p>
+  }
 </main>
 <router-outlet></router-outlet>
