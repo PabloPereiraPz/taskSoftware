@@ -10,12 +10,10 @@ import {
 
 // User component - Gerencia a exibição e interação dos usuários
 import { User } from './user.model';
-import { Card } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-user',
-  standalone: true,
-  imports: [Card],
+  standalone: false,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })

@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { UserComponent } from './user/user.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { dataUsers } from './dataUsers';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, UserComponent, TasksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  standalone: true,
+  standalone: false,
 })
 export class AppComponent {
   title = 'angular-complete-2025';

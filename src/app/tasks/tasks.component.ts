@@ -1,6 +1,4 @@
 import { Component, Input, Output } from '@angular/core';
-import { TaskComponent } from './task/task.component';
-import { NewTasksComponent } from './new-tasks/new-tasks.component';
 import { Add } from './new-tasks/new-tasks.model';
 import { TasksService } from './tasks.service';
 
@@ -8,8 +6,7 @@ import { TasksService } from './tasks.service';
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
-  imports: [TaskComponent, NewTasksComponent],
-  standalone: true,
+  standalone: false,
 })
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
