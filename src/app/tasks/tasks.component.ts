@@ -24,12 +24,17 @@ export class TasksComponent implements OnInit {
   loadTasks() {
     this.tasksService.getUserTasks(this.userId).subscribe((tasks) => {
       this.selectedUserTasks = tasks.filter(
-        (task: any) => task.userId === this.userId
+        (task: any) => task.userId === this.userId && !task.completed
       );
     });
   }
 
-  newTask(taskData: Add) {
+  newTask(taskData?: Add) {
+
+    if (!taskData) {
+      this.addingTask = true;
+      return;
+    }
     // Recebe taskData do formulário
     this.tasksService.addTask(this.userId, taskData).subscribe((newTask) => {
       this.selectedUserTasks.push(newTask);

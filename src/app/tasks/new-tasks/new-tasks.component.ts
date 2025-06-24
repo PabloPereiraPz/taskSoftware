@@ -23,14 +23,11 @@ export class NewTasksComponent {
 
   onSubmit() {
     this.tasksSerivce
-      .addTask(
-        {
-          title: this.tituloAdicionado,
-          summary: this.summaryAdicionado,
-          dueDate: this.dataAdicionada,
-        },
-        this.userId
-      )
+      .addTask(this.userId, {
+        title: this.tituloAdicionado,
+        summary: this.summaryAdicionado,
+        dueDate: this.dataAdicionada,
+      })
       .subscribe(() => {
         this.close.emit();
       });

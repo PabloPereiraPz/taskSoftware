@@ -2,7 +2,7 @@
 
 <main>
   <ul id="users">
-    @for (nomeColocado of user; track nomeColocado.id) {
+    @for (nomeColocado of users; track nomeColocado.id) {
     <li>
       <app-user
         [user]="nomeColocado"

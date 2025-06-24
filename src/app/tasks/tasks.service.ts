@@ -10,7 +10,7 @@ export class TasksService {
 
   getUserTasks(userId: string): Observable<Task[]> {
     // Busca todas as tasks e filtra pelo userId
-    return this.http.get<Task[]>('/api/tasks');
+    return this.http.get<Task[]>(`/api/tasks?userId=${userId}`);
     // O filtro por userId pode ser feito no componente ou na API
   }
 

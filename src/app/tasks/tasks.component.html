@@ -1,15 +1,12 @@
 <ng-container *ngIf="addingTask">
-  <app-new-tasks
-    [userId]="userId"
-    (close)="cancelandoTask()"
-  ></app-new-tasks>
+  <app-new-tasks [userId]="userId" (close)="cancelandoTask()"></app-new-tasks>
 </ng-container>
 
 <section id="tasks">
   <header>
     <h2>{{ name }}'s tasks</h2>
     <menu>
-      <button (click)="newTask(taskData: Add)">Adicionar tarefas</button>
+      <button (click)="newTask()">Adicionar tarefas</button>
     </menu>
   </header>
 
