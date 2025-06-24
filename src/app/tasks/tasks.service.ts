@@ -1,57 +1,31 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Task } from './task/task.model';
 import { Add } from './new-tasks/new-tasks.model';
 
-@Injectable( {providedIn: 'root'} )
-
+@Injectable({ providedIn: 'root' })
 export class TasksService {
-  private tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ];
+  constructor(private http: HttpClient) {}
 
-  getUserTasks(userId: string) {
-    return this.tasks.filter((task) => task.userId === userId);
+  getUserTasks(userId: string): Observable<Task[]> {
+    // Busca todas as tasks e filtra pelo userId
+    return this.http.get<Task[]>('/api/tasks');
+    // O filtro por userId pode ser feito no componente ou na API
   }
 
-  addTask(taskData: Add, userId: string) {
-    this.tasks.unshift({
-      id: new Date().getTime().toString(),
-      userId: userId,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.dueDate,
-    });
-  }
-  removeTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  addTask(userId: string, taskData: Add): Observable<any> {
+    // Envia a task para a API
+    return this.http.post('/api/tasks', { ...taskData, userId });
   }
 
-  completeTask(taskId: string) {
-    const task = this.tasks.find(task => task.id === taskId);
-    if (task) {
-      this.removeTask(taskId);
-    }
+  removeTask(id: string): Observable<any> {
+    // remover
+    return this.http.delete(`/api/tasks/${id}`);
+  }
+
+  completeTask(taskId: string): Observable<any> {
+    // PATCH correto para /api/complete-task
+    return this.http.patch('/api/complete-task', { id: taskId });
   }
 }

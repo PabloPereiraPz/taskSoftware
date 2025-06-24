@@ -10,9 +10,11 @@ import { TasksService } from '../tasks.service';
 export class NewTasksComponent {
   @Input({ required: true }) userId!: string;
   @Output() close = new EventEmitter<void>();
+
   tituloAdicionado = '';
   summaryAdicionado = '';
   dataAdicionada = '';
+
   private tasksSerivce = inject(TasksService);
 
   cancelandoTask() {
@@ -20,14 +22,17 @@ export class NewTasksComponent {
   }
 
   onSubmit() {
-    this.tasksSerivce.addTask(
-      {
-        title: this.tituloAdicionado,
-        summary: this.summaryAdicionado,
-        dueDate: this.dataAdicionada,
-      },
-      this.userId
-    );
-    this.close.emit();
+    this.tasksSerivce
+      .addTask(
+        {
+          title: this.tituloAdicionado,
+          summary: this.summaryAdicionado,
+          dueDate: this.dataAdicionada,
+        },
+        this.userId
+      )
+      .subscribe(() => {
+        this.close.emit();
+      });
   }
 }

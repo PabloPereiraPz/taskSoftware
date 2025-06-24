@@ -1,6 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Add } from './new-tasks/new-tasks.model';
 import { TasksService } from './tasks.service';
+import { Task } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -8,29 +9,46 @@ import { TasksService } from './tasks.service';
   styleUrls: ['./tasks.component.css'],
   standalone: false,
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
   addingTask = false;
-  private tasksService: TasksService;
+  selectedUserTasks: Task[] = [];
 
-  constructor(tasksService: TasksService) {
-    this.tasksService = tasksService;
+  constructor(private tasksService: TasksService) {}
+
+  ngOnInit() {
+    this.loadTasks();
   }
 
-  get selectedUserTasks() {
-    return this.tasksService.getUserTasks(this.userId);
+  loadTasks() {
+    this.tasksService.getUserTasks(this.userId).subscribe((tasks) => {
+      this.selectedUserTasks = tasks.filter(
+        (task: any) => task.userId === this.userId
+      );
+    });
   }
 
-  newTask() {
-    this.addingTask = true;
+  newTask(taskData: Add) {
+    // Recebe taskData do formulário
+    this.tasksService.addTask(this.userId, taskData).subscribe((newTask) => {
+      this.selectedUserTasks.push(newTask);
+      this.addingTask = false;
+    });
   }
 
   cancelandoTask() {
     this.addingTask = false;
+    this.loadTasks();
   }
 
   taskComplete(taskId: string) {
-    this.tasksService.completeTask(taskId);
+    this.tasksService.completeTask(taskId).subscribe(() => {
+      this.loadTasks();
+    });
+  }
+
+  trackByTaskId(index: number, task: any) {
+    return task.id;
   }
 }
