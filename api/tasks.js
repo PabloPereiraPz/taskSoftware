@@ -10,6 +10,7 @@ export default function handler(req, res) {
         return res.status(200).json(userTasks);
     } else if (req.method === 'POST') {
         const newTask = req.body;
+        console.log('Recebendo nova tarefa:', newTask); // LOG
         if (!newTask.userId) {
             return res.status(400).json({ error: 'userId é obrigatório' });
         }
@@ -18,10 +19,14 @@ export default function handler(req, res) {
             id: Date.now().toString(),
             completed: false
         };
+        console.log('Tarefa criada:', task); // LOG
         tasks.push(task);
         res.status(201).json(task);
     } else if (req.method === 'DELETE') {
-        const { id } = req.body;
+        const id = req.url.split('/').pop();
+        if (!id) {
+            return res.status(400).json({ error: 'Task ID is required' });
+        }
         tasks = tasks.filter(task => task.id !== id);
         res.status(200).json({ id });
     } else if (req.method === 'PATCH') {

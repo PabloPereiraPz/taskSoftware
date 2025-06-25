@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './card.component.css',
   standalone: false,
 })
-export class Card {}
+export class CardComponent {
+  // Base component for card structure
+}
