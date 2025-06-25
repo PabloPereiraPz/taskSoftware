@@ -1,6 +1,6 @@
-import { tasks } from './tasks.js';
+const tasks = require('./tasks.js');
 
-export default function handler(req, res) {
+module.exports = (req, res) => {
     if (req.method === 'PATCH') {
         const { id } = req.body;
         if (!id) {
@@ -20,4 +20,4 @@ export default function handler(req, res) {
     } else {
         res.status(405).end();
     }
-}
+};

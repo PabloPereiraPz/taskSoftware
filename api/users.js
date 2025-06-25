@@ -1,9 +1,9 @@
-import users from './users.data.js';
+const users = require('./users.data.js');
 
-export default function handler(req, res) {
+module.exports = (req, res) => {
     if (req.method === 'GET') {
         res.status(200).json(users);
     } else {
         res.status(405).end();
     }
-}
+};

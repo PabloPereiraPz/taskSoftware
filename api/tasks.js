@@ -1,6 +1,6 @@
-export let tasks = [];
+let tasks = [];
 
-export default function handler(req, res) {
+module.exports = (req, res) => {
     if (req.method === 'GET') {
         const { userId } = req.query;
         if (!userId) {
@@ -34,4 +34,4 @@ export default function handler(req, res) {
     } else {
         res.status(405).end();
     }
-}
+};
