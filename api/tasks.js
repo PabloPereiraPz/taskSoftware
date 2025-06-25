@@ -2,15 +2,14 @@ export let tasks = [];
 
 export default function handler(req, res) {
     if (req.method === 'GET') {
-        const { userId } = req.query
+        const { userId } = req.query;
         if (!userId) {
-            return res.status(400).json({ error: "UserId obrigatório" })
+            return res.status(400).json({ error: "UserId obrigatório" });
         }
         const userTasks = tasks.filter(task => task.userId === userId);
         return res.status(200).json(userTasks);
     } else if (req.method === 'POST') {
         const newTask = req.body;
-        console.log('Recebendo nova tarefa:', newTask); // LOG
         if (!newTask.userId) {
             return res.status(400).json({ error: 'userId é obrigatório' });
         }
@@ -19,7 +18,6 @@ export default function handler(req, res) {
             id: Date.now().toString(),
             completed: false
         };
-        console.log('Tarefa criada:', task); // LOG
         tasks.push(task);
         res.status(201).json(task);
     } else if (req.method === 'DELETE') {
