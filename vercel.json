@@ -13,7 +13,7 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "handle": "filesystem" },
-    { 
+    {
       "src": "/assets/(.*)",
       "headers": { "cache-control": "public, max-age=31536000, immutable" },
       "continue": true
@@ -23,9 +23,6 @@
       "headers": { "cache-control": "public, max-age=31536000, immutable" },
       "continue": true
     },
-    {
-      "src": "/((?!api/.*).*)",
-      "dest": "/dist/angular-complete-2025/browser/index.html"
-    }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

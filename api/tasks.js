@@ -1,4 +1,4 @@
-let tasks = [];
+const tasks = require('./tasks.data.js');
 
 module.exports = (req, res) => {
     if (req.method === 'GET') {
@@ -25,11 +25,13 @@ module.exports = (req, res) => {
         if (!id) {
             return res.status(400).json({ error: 'Task ID is required' });
         }
-        tasks = tasks.filter(task => task.id !== id);
+        const idx = tasks.findIndex(task => task.id === id);
+        if (idx !== -1) tasks.splice(idx, 1);
         res.status(200).json({ id });
     } else if (req.method === 'PATCH') {
         const { id } = req.body;
-        tasks = tasks.map(task => task.id === id ? { ...task, completed: true } : task);
+        const idx = tasks.findIndex(task => task.id === id);
+        if (idx !== -1) tasks[idx].completed = true;
         res.status(200).json({ id, completed: true });
     } else {
         res.status(405).end();

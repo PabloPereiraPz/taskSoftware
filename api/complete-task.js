@@ -1,4 +1,4 @@
-const tasks = require('./tasks.js');
+const tasks = require('./tasks.data.js');
 
 module.exports = (req, res) => {
     if (req.method === 'PATCH') {
