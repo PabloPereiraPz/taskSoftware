@@ -12,6 +12,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)",      "dest": "/index.html" }
+    { "src": "/(.*)", "has": [{ "type": "file" }], "dest": "/dist/angular-complete-2025/browser/$1" },
+    { "src": "/(.*)", "dest": "/dist/angular-complete-2025/browser/index.html" }
   ]
 }
