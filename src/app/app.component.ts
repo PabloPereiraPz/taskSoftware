@@ -14,8 +14,10 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  private apiBase = typeof window !== 'undefined' ? window.location.origin : '';
+
   ngOnInit() {
-    this.http.get<User[]>('/api/users').subscribe({
+    this.http.get<User[]>(`${this.apiBase}/api/users`).subscribe({
       next: (data) => {
         console.log('Usuários carregados do backend', data);
         this.users = data;
