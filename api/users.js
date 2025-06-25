@@ -1,4 +1,4 @@
-import users from '../data/users.js';
+import users from './users.data.js';
 
 export default function handler(req, res) {
     if (req.method === 'GET') {
