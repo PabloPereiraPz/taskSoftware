@@ -1,11 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "dist/angular-complete-2025/browser/**", "use": "@vercel/static" }
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "outputDirectory": "dist/angular-complete-2025/browser"
+      }
+    },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/dist/angular-complete-2025/browser/index.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)",      "dest": "/index.html" }
   ]
 }
